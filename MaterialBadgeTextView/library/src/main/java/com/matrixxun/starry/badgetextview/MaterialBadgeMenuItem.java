@@ -140,6 +140,10 @@ public class MaterialBadgeMenuItem {
         return badge;
     }
 
+    public ImageView getIcon(){
+        return icon;
+    }
+
     public static MaterialBadgeTextView getBadge(MenuItem menu) {
         if (menu == null) {
             return null;
