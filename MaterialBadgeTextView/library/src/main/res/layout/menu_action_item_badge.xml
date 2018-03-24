@@ -1,36 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="48dp"
-    android:layout_height="48dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:minWidth="48dp"
-    android:minHeight="48dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="48dp"
+    android:background="?attr/actionBarItemBackground"
     android:clickable="true"
     android:focusable="true"
-    android:background="?attr/actionBarItemBackground">
+    android:minHeight="48dp"
+    android:minWidth="48dp">
+
+    <TextView
+        android:id="@+id/menu_title"
+        style="@style/TextAppearance.AppCompat.Menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        tools:text="Title" />
 
     <ImageView
         android:id="@+id/menu_badge_icon"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:tint="@android:color/white"
+        android:padding="4dp"
         android:scaleType="center"
-        />
+        android:tint="@android:color/white" />
 
     <com.matrixxun.starry.badgetextview.MaterialBadgeTextView
         android:id="@+id/menu_badge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|end"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textColor="@android:color/white"
-        android:maxLines="1"
+        android:background="#EF4738"
         android:ellipsize="none"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textColor="@android:color/white"
         android:textSize="10sp"
-        android:background="#EF4738"/>
+        android:textStyle="bold" />
 </FrameLayout>

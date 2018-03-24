@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.matrixxun.starry.badgetextview.MenuItemBadge;
+import com.matrixxun.starry.badgetextview.MaterialBadgeMenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +23,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
+        toolbar.inflateMenu(R.menu.menu_main);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId()==R.id.menu_shopcart){
+                    Toast.makeText(MainActivity.this, "点击了", Toast.LENGTH_SHORT).show();
+                }
+                return false;
+            }
+        });
+
+        MaterialBadgeMenuItem menuItemShopCart= new MaterialBadgeMenuItem.Builder(this)
+                .iconDrawable(ContextCompat.getDrawable(this, R.drawable.ic_shopping_cart_md))
+                .iconTintColor(Color.WHITE)
+                .textBackgroundColor(Color.parseColor("#FB8C00"))
+                .textColor(Color.WHITE)
+                .create(toolbar.getMenu().findItem(R.id.menu_shopcart));
+        menuItemShopCart.getBadge().setText("New");
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -35,50 +54,66 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        MenuItem menuItemNewFeature = menu.findItem(R.id.menu_new_feature);
-        MenuItemBadge.update(this, menuItemNewFeature, new MenuItemBadge.Builder()
+
+        MaterialBadgeMenuItem menuItemNewFeature = new MaterialBadgeMenuItem.Builder(this)
                 .iconDrawable(ContextCompat.getDrawable(this, R.drawable.ic_account_my_order_md))
                 .iconTintColor(Color.WHITE)
                 .textBackgroundColor(Color.parseColor("#EF4738"))
-                .textColor(Color.WHITE));
+                .textColor(Color.WHITE)
+                .create(menu.findItem(R.id.menu_new_feature));
 
-        MenuItem menuItemNotification = menu.findItem(R.id.menu_notification);
-        MenuItemBadge.update(this, menuItemNotification, new MenuItemBadge.Builder()
+
+        MaterialBadgeMenuItem menuItemNotification = new MaterialBadgeMenuItem.Builder(this)
                 .iconDrawable(ContextCompat.getDrawable(this, R.drawable.ic_notification_md))
                 .iconTintColor(Color.WHITE)
                 .textBackgroundColor(Color.parseColor("#36B100"))
-                .textColor(Color.WHITE));
-        MenuItemBadge.getBadgeTextView(menuItemNotification).setBadgeCount("5");
+                .textColor(Color.WHITE)
+                .create(menu.findItem(R.id.menu_notification));
+        menuItemNotification.getBadge().setBadgeCount("5");
 
 
-        MenuItem menuItemMessage = menu.findItem(R.id.menu_message);
-        MenuItemBadge.update(this, menuItemMessage, new MenuItemBadge.Builder()
+        MaterialBadgeMenuItem menuItemMessage = new MaterialBadgeMenuItem.Builder(this)
                 .iconDrawable(ContextCompat.getDrawable(this, R.drawable.ic_email_md))
                 .iconTintColor(Color.WHITE)
                 .textBackgroundColor(Color.parseColor("#EF4738"))
-                .textColor(Color.WHITE));
-        MenuItemBadge.getBadgeTextView(menuItemMessage).setBadgeCount(999);
+                .textColor(Color.WHITE)
+                .create(menu.findItem(R.id.menu_message));
+        menuItemMessage.getBadge().setBadgeCount(999);
 
 
-        MenuItem menuItemShopCart = menu.findItem(R.id.menu_shopcart);
-        MenuItemBadge.update(this, menuItemShopCart, new MenuItemBadge.Builder()
+        MaterialBadgeMenuItem menuItemShopCart= new MaterialBadgeMenuItem.Builder(this)
                 .iconDrawable(ContextCompat.getDrawable(this, R.drawable.ic_shopping_cart_md))
                 .iconTintColor(Color.WHITE)
                 .textBackgroundColor(Color.parseColor("#FB8C00"))
-                .textColor(Color.WHITE));
-        MenuItemBadge.getBadgeTextView(menuItemShopCart).setText("New");
+                .textColor(Color.WHITE)
+                .create(menu.findItem(R.id.menu_shopcart));
+        menuItemShopCart.getBadge().setText("New");
+
+//        MenuItem menuSettings = menu.findItem(R.id.action_settings);
+//        MaterialBadgeMenuItem.update(this, menuSettings, new MaterialBadgeMenuItem.Builder()
+//                .iconDrawable(ContextCompat.getDrawable(this, R.drawable.ic_vec_setting_d))
+//                .iconTintColor(Color.WHITE)
+//                .textBackgroundColor(Color.parseColor("#FB8C00"))
+//                .textColor(Color.WHITE));
+//        MaterialBadgeMenuItem.getBadgeTextView(menuSettings).setBadgeCount(10);
+
         return true;
     }
 
     private void toggleRedIconInNewFeatureMenu(MenuItem menuItemNewFeature) {
         showRedIcon = !showRedIcon;
         if (showRedIcon) {
-            MenuItemBadge.getBadgeTextView(menuItemNewFeature).setHighLightMode(true);
+            MaterialBadgeMenuItem.getBadge(menuItemNewFeature).setHighLightMode(true);
         } else {
-            MenuItemBadge.getBadgeTextView(menuItemNewFeature).clearHighLightMode();
+            MaterialBadgeMenuItem.getBadge(menuItemNewFeature).clearHighLightMode();
         }
     }
 
@@ -91,26 +126,27 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == R.id.menu_message) {
-            Toast.makeText(this, "Click Message Menu!", Toast.LENGTH_LONG).show();
-            return true;
-        } else if (id == R.id.menu_shopcart) {
-            Toast.makeText(this, "Click ShopCart Menu!", Toast.LENGTH_LONG).show();
-            return true;
-        } else if (id == R.id.menu_new_feature) {
-            Toast.makeText(this, "Toggle Red Icon in New Feature Menu!", Toast.LENGTH_LONG).show();
-            //noinspection RestrictedApi
-            invalidateOptionsMenu();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            Toast.makeText(this, "Click Setting Menu!", Toast.LENGTH_LONG).show();
+//            return true;
+//        } else if (id == R.id.menu_message) {
+//            Toast.makeText(this, "Click Message Menu!", Toast.LENGTH_LONG).show();
+//            return true;
+//        } else if (id == R.id.menu_shopcart) {
+//            Toast.makeText(this, "Click ShopCart Menu!", Toast.LENGTH_LONG).show();
+//            return true;
+//        } else if (id == R.id.menu_new_feature) {
+//            Toast.makeText(this, "Toggle Red Icon in New Feature Menu!", Toast.LENGTH_LONG).show();
+//            //noinspection RestrictedApi
+//            invalidateOptionsMenu();
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 }
