@@ -10,7 +10,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.matrixxun.starry.badgetextview.MaterialBadgeMenuItem;
 
@@ -23,25 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-        toolbar.inflateMenu(R.menu.menu_main);
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId()==R.id.menu_shopcart){
-                    Toast.makeText(MainActivity.this, "点击了", Toast.LENGTH_SHORT).show();
-                }
-                return false;
-            }
-        });
-
-        MaterialBadgeMenuItem menuItemShopCart= new MaterialBadgeMenuItem.Builder(this)
-                .iconDrawable(ContextCompat.getDrawable(this, R.drawable.ic_shopping_cart_md))
-                .iconTintColor(Color.WHITE)
-                .textBackgroundColor(Color.parseColor("#FB8C00"))
-                .textColor(Color.WHITE)
-                .create(toolbar.getMenu().findItem(R.id.menu_shopcart));
-        menuItemShopCart.getBadge().setText("New");
+        setSupportActionBar(toolbar);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -53,10 +34,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
-
 
 
     @Override
@@ -89,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         menuItemMessage.getBadge().setBadgeCount(999);
 
 
-        MaterialBadgeMenuItem menuItemShopCart= new MaterialBadgeMenuItem.Builder(this)
+        MaterialBadgeMenuItem menuItemShopCart = new MaterialBadgeMenuItem.Builder(this)
                 .iconDrawable(ContextCompat.getDrawable(this, R.drawable.ic_shopping_cart_md))
                 .iconTintColor(Color.WHITE)
                 .textBackgroundColor(Color.parseColor("#FB8C00"))
@@ -97,13 +74,13 @@ public class MainActivity extends AppCompatActivity {
                 .create(menu.findItem(R.id.menu_shopcart));
         menuItemShopCart.getBadge().setText("New");
 
-//        MenuItem menuSettings = menu.findItem(R.id.action_settings);
-//        MaterialBadgeMenuItem.update(this, menuSettings, new MaterialBadgeMenuItem.Builder()
-//                .iconDrawable(ContextCompat.getDrawable(this, R.drawable.ic_vec_setting_d))
-//                .iconTintColor(Color.WHITE)
-//                .textBackgroundColor(Color.parseColor("#FB8C00"))
-//                .textColor(Color.WHITE));
-//        MaterialBadgeMenuItem.getBadgeTextView(menuSettings).setBadgeCount(10);
+        MaterialBadgeMenuItem menuSettings = new MaterialBadgeMenuItem.Builder(this)
+                .iconDrawable(ContextCompat.getDrawable(this, R.drawable.ic_vec_setting_d))
+                .iconTintColor(Color.WHITE)
+                .textBackgroundColor(Color.parseColor("#FB8C00"))
+                .textColor(Color.WHITE)
+                .create(menu.findItem(R.id.action_settings));
+        menuSettings.getBadge().setBadgeCount(10);
 
         return true;
     }
