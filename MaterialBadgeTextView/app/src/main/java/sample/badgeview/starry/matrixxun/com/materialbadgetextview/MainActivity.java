@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.matrixxun.starry.badgetextview.MaterialBadgeMenuItem;
 
@@ -103,27 +104,27 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            Toast.makeText(this, "Click Setting Menu!", Toast.LENGTH_LONG).show();
-//            return true;
-//        } else if (id == R.id.menu_message) {
-//            Toast.makeText(this, "Click Message Menu!", Toast.LENGTH_LONG).show();
-//            return true;
-//        } else if (id == R.id.menu_shopcart) {
-//            Toast.makeText(this, "Click ShopCart Menu!", Toast.LENGTH_LONG).show();
-//            return true;
-//        } else if (id == R.id.menu_new_feature) {
-//            Toast.makeText(this, "Toggle Red Icon in New Feature Menu!", Toast.LENGTH_LONG).show();
-//            //noinspection RestrictedApi
-//            invalidateOptionsMenu();
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            Toast.makeText(this, "Click Setting Menu!", Toast.LENGTH_LONG).show();
+            return true;
+        } else if (id == R.id.menu_message) {
+            Toast.makeText(this, "Click Message Menu!", Toast.LENGTH_LONG).show();
+            return true;
+        } else if (id == R.id.menu_shopcart) {
+            Toast.makeText(this, "Click ShopCart Menu!", Toast.LENGTH_LONG).show();
+            return true;
+        } else if (id == R.id.menu_new_feature) {
+            Toast.makeText(this, "Toggle Red Icon in New Feature Menu!", Toast.LENGTH_LONG).show();
+            //noinspection RestrictedApi
+            invalidateOptionsMenu();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
